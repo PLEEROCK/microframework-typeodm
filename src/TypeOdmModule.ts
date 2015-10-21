@@ -44,13 +44,18 @@ export class TypeOdmModule implements Module {
         this.configuration = configuration;
     }
 
-    onBootstrap(dependentModules?: Module[]): Promise<any> {
+    onBootstrap(): Promise<any> {
         return this.setupODM();
     }
 
-    onShutdown(): Promise<any> {
-        this.closeConnections();
+    afterBootstrap(): Promise<any> {
+        this._connectionManager.importDocumentsFromDirectories(this.getOdmDocumentDirectories());
+        this._connectionManager.importSubscribersFromDirectories(this.getOdmSubscriberDirectories());
         return Promise.resolve();
+    }
+
+    onShutdown(): Promise<any> {
+        return this.closeConnections();
     }
 
     // -------------------------------------------------------------------------
@@ -72,9 +77,7 @@ export class TypeOdmModule implements Module {
         this._connectionManager = this.options.container.get(ConnectionManager);
         this._connectionManager.container = this.options.container;
         this.addConnections();
-        this._connectionManager.importDocumentsFromDirectories(this.getOdmDocumentDirectories());
-        this._connectionManager.importSubscribersFromDirectories(this.getOdmSubscriberDirectories());
-        return Promise.all(this.connect());
+        return this.connect();
     }
 
     private addConnections() {
@@ -90,17 +93,20 @@ export class TypeOdmModule implements Module {
         }
     }
 
-    private closeConnections() {
+    private closeConnections(): Promise<any> {
+        let promises: Promise<any>[] = [];
         if (this.configuration.connection)
-                this._connectionManager.getConnection().close();
+            promises.push(this._connectionManager.getConnection().close());
 
         if (this.configuration.connections)
-            this.configuration
+            promises.concat(this.configuration
                 .connections
-                .forEach(connection => this._connectionManager.getConnection(connection.name).close());
+                .map(connection => this._connectionManager.getConnection(connection.name).close()));
+
+        return Promise.all(promises);
     }
 
-    private connect(): Promise<any>[] {
+    private connect(): Promise<void> {
         let promises: Promise<any>[] = [];
         if (this.configuration.connection)
             promises.push(this._connectionManager.getConnection().connect(this.configuration.connection));
@@ -110,7 +116,7 @@ export class TypeOdmModule implements Module {
                 return this._connectionManager.getConnection(connection.name).connect(connection.options);
             }));
         }
-        return promises;
+        return Promise.all(promises).then(() => {});
     }
 
     private getOdmDocumentDirectories(): string[] {

@@ -1,6 +1,6 @@
 {
   "name": "microframework-typeodm",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TypeODM integration with microframework",
   "license": "Apache-2.0",
   "readmeFilename": "README.md",
@@ -26,7 +26,7 @@
     ]
   },
   "dependencies": {
-    "microframework": ">=0.1.0",
+    "microframework": ">=0.2.0",
     "typeodm": ">=0.0.5"
   },
   "devDependencies": {

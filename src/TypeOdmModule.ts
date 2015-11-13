@@ -121,16 +121,23 @@ export class TypeOdmModule implements Module {
 
     private getOdmDocumentDirectories(): string[] {
         if (!this.configuration || !this.configuration.documentsDirectories)
-            return [this.options.frameworkSettings.baseDirectory + '/' + TypeOdmModule.DEFAULT_ODM_DOCUMENT_DIRECTORY];
+            return [this.getSourceCodeDirectory() + TypeOdmModule.DEFAULT_ODM_DOCUMENT_DIRECTORY];
 
         return this.configuration.documentsDirectories;
     }
 
     private getOdmSubscriberDirectories(): string[] {
         if (!this.configuration || !this.configuration.subscribersDirectories)
-            return [this.options.frameworkSettings.baseDirectory + '/' + TypeOdmModule.DEFAULT_ODM_SUBSCRIBER_DIRECTORY];
+            return [this.getSourceCodeDirectory() + TypeOdmModule.DEFAULT_ODM_SUBSCRIBER_DIRECTORY];
 
         return this.configuration.subscribersDirectories;
+    }
+
+    private getSourceCodeDirectory() {
+        let dir = this.options.frameworkSettings.baseDirectory + '/';
+        if (this.options.frameworkSettings.srcDirectory)
+            dir += this.options.frameworkSettings.srcDirectory + '/';
+        return dir;
     }
 
 }

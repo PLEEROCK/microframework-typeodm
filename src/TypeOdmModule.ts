@@ -12,8 +12,8 @@ export class TypeOdmModule implements Module {
     // Constants
     // -------------------------------------------------------------------------
 
-    public static DEFAULT_ODM_DOCUMENT_DIRECTORY = 'document';
-    public static DEFAULT_ODM_SUBSCRIBER_DIRECTORY = 'subscriber';
+    public static DEFAULT_ODM_DOCUMENT_DIRECTORY = "document";
+    public static DEFAULT_ODM_SUBSCRIBER_DIRECTORY = "subscriber";
 
     // -------------------------------------------------------------------------
     // Properties
@@ -28,11 +28,11 @@ export class TypeOdmModule implements Module {
     // -------------------------------------------------------------------------
 
     getName(): string {
-        return 'TypeOdmModule';
+        return "TypeOdmModule";
     }
 
     getConfigurationName(): string {
-        return 'typeodm';
+        return "typeodm";
     }
 
     isConfigurationRequired(): boolean {
@@ -82,13 +82,13 @@ export class TypeOdmModule implements Module {
 
     private addConnections() {
         if (this.configuration.connection) {
-            if (!this.configuration.connectionDriver || this.configuration.connectionDriver === 'mongodb')
+            if (!this.configuration.connectionDriver || this.configuration.connectionDriver === "mongodb")
                 this._connectionManager.addConnection(new MongodbDriver());
         }
 
         if (this.configuration.connections) {
             this.configuration.connections
-                .filter(connection => !connection.driver || connection.driver === 'mongodb')
+                .filter(connection => !connection.driver || connection.driver === "mongodb")
                 .forEach(connection => this._connectionManager.addConnection(connection.name, new MongodbDriver()));
         }
     }
@@ -134,7 +134,7 @@ export class TypeOdmModule implements Module {
     }
 
     private getSourceCodeDirectory() {
-        return this.options.frameworkSettings.srcDirectory + '/';
+        return this.options.frameworkSettings.srcDirectory + "/";
     }
 
 }

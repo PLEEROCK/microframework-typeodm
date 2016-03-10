@@ -1,48 +1,45 @@
 {
   "name": "microframework-typeodm",
-  "version": "0.0.5",
+  "private": true,
+  "version": "0.1.0",
   "description": "TypeODM integration with microframework",
   "license": "Apache-2.0",
   "readmeFilename": "README.md",
   "author": {
     "name": "Umed Khudoiberdiev",
-    "email": "zarrhost@gmail.com"
+    "email": "pleerock.me@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PLEEROCK/microframework-typeodm.git"
+    "url": "https://github.com/pleerock/microframework-typeodm.git"
   },
   "bugs": {
-    "url": "https://github.com/PLEEROCK/microframework-typeodm/issues"
+    "url": "https://github.com/pleerock/microframework-typeodm/issues"
   },
   "tags": [
     "microframework",
     "typeodm"
   ],
-  "typings": "./microframework-typeodm.d.ts",
-  "typescript": {
-    "definitions": [
-      "microframework-typeodm.d.ts"
-    ]
-  },
   "dependencies": {
-    "microframework": ">=0.2.0",
-    "typeodm": ">=0.0.5"
+    "microframework": "~0.4.0",
+    "typeodm": "~0.2.0"
   },
   "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.2.0",
     "del": "^2.0.2",
-    "dts-generator": "^1.5.0",
-    "fs": "0.0.2",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.1",
-    "gulp-plumber": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-replace": "^0.5.4",
     "gulp-shell": "^0.5.0",
-    "gulp-typescript": "^2.9.0",
-    "run-sequence": "^1.1.4",
-    "tsd": "^0.6.4",
-    "typescript": "^1.6.2"
-  },
-  "scripts": {
-    "postversion": "./node_modules/.bin/gulp package"
+    "gulp-tslint": "^4.3.3",
+    "gulpclass": "0.1.0",
+    "mocha": "^2.3.4",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0",
+    "tslint": "^3.3.0",
+    "tslint-stylish": "^2.1.0-beta",
+    "typescript": "^1.8.7",
+    "typings": "^0.7.7"
   }
 }

@@ -1,3 +1,5 @@
+> This repository is deprecated. Microframework architecure has changed. Please consider writing your own module for a newer versions of microframework.
+
 # TypeODM module for Microframework
 
 Adds integration between [typeodm](http://github.com/pleerock/typeodm) and
